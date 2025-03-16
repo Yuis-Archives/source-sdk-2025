@@ -454,9 +454,7 @@ void CBreakable::Precache( void )
 	{
 		pGibName = STRING(m_iszGibModel);
 
-#ifdef HL1_DLL
 		PrecacheModel( pGibName );
-#endif
 	}
 
 	m_iszModelName = MAKE_STRING( pGibName );
