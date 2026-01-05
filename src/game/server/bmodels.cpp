@@ -109,14 +109,16 @@ void CFuncWall::Use( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_TYPE use
 //-----------------------------------------------------------------------------
 void CBaseEntity::InputUse( inputdata_t &inputdata )
 {
-	if ( (inputdata.value.String()) == "")
+	const char* pszData = inputdata.value.String();
+	if ( pszData[0] == '\0')
 	{
 		// if empty, assume USE_TOGGLE
 		Use( inputdata.pActivator, inputdata.pCaller, USE_TOGGLE, 0 );
 	}
 	else
 	{
-		int iData = inputdata.value.Int();
+		//int iData = inputdata.value.Int(); // will return 0 if NaN
+		int iData = atoi(pszData); // will also return 0 if NaN
 		if ( (iData >= 0) && (iData <= 3) )
 		{
 			// Valid USE_TYPE; pass to Use funcion as-is
